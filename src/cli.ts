@@ -492,7 +492,13 @@ function printInteractiveInitResult(result: InitResult): void {
 
 async function serve(): Promise<void> {
   const config = loadConfig();
-  await runStartupWorktreeCleanup(config);
+
+  // Set DEVSPACE_STARTUP_WORKTREE_PRUNE=0 (or "false") to keep stale managed worktrees on start.
+  // `devspace worktrees prune` still prunes them on demand.
+  if (!["0", "false"].includes((process.env.DEVSPACE_STARTUP_WORKTREE_PRUNE ?? "").toLowerCase())) {
+    await runStartupWorktreeCleanup(config);
+  }
+
   const { configureHttpServer, createServer } = await import("./server.js");
   const { workspaceWebUrl } = await import("./workspace-web.js");
   const { app, close, localAgentProviders } = createServer(config);

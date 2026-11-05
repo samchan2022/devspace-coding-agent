@@ -69,6 +69,21 @@ Startup rejects an applied migration version whose name differs from what the
 build expects, or a migration version unknown to the build. Renumber migrations;
 never reuse migration versions.
 
+## Git publishing tools
+
+Workspace Git tools: `git_create_branch`, `git_stage_changes`, `git_commit`,
+`git_push`, and `github_create_pull_request`. Staging uses explicit file paths,
+commits cannot target `main` or `master`, and pushing checks an exact HEAD SHA.
+Publishing tools require a confirmation argument; the MCP host must still enforce
+its own user-approval policy. No force push is supported.
+
+These tools are available only after building and running this checkout. The
+separately installed global `devspace` executable is not updated automatically.
+
+`devspace serve` prunes managed worktrees unused for 3 days on startup. Set
+`DEVSPACE_STARTUP_WORKTREE_PRUNE=0` to skip that; `devspace worktrees prune`
+still runs it on demand.
+
 ## Run verification
 
 ```bash
