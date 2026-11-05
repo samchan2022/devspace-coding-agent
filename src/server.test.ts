@@ -47,11 +47,11 @@ test("tool surfaces expose the expected host-facing tools", async (t) => {
   }> = [
     {
       surface: "claude",
-      expected: ["open_workspace", "read", "write", "edit", "bash", "show_changes"],
+      expected: ["open_workspace", "read", "write", "edit", "bash", "show_changes", "git_create_branch", "git_stage_changes", "git_commit", "git_push", "github_create_pull_request"],
     },
     {
       surface: "codex",
-      expected: ["open_workspace", "read", "apply_patch", "exec_command", "write_stdin", "show_changes"],
+      expected: ["open_workspace", "read", "apply_patch", "exec_command", "write_stdin", "show_changes", "git_create_branch", "git_stage_changes", "git_commit", "git_push", "github_create_pull_request"],
     },
   ];
 

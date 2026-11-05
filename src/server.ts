@@ -38,6 +38,7 @@ import {
   requestPath,
 } from "./logger.js";
 import { readFileTool } from "./pi-tools.js";
+import { registerGitTools } from "./git-tools.js";
 import { SingleUserOAuthProvider } from "./oauth-provider.js";
 import {
   compileMcpRegistrationSurface,
@@ -853,6 +854,7 @@ function registerMcpSurface(
     workspaces,
     processSessions,
   });
+  registerGitTools(internalTarget, workspaces, config);
 
   if (codeModeExecutions) {
     registerCodeModeTools(registrationTarget, workspaces, codeModeExecutions);
